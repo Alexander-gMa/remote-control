@@ -16,7 +16,7 @@ wsServer.on("listening", () => {
 })
 
 export const connection = async (ws: any) => {
-    const wsStream = createWebSocketStream(ws, { encoding: "utf-8" });
+    const wsStream = createWebSocketStream(ws, { encoding: "utf-8", decodeStrings: false });
     wsStream.on("data", (chunk) => {
         console.log(chunk);
         const [method, ...value] = chunk?.split(' ');
@@ -25,9 +25,9 @@ export const connection = async (ws: any) => {
             if (method !== 'mouse_position') {
                 move_mouse(method, x, y, value);
             }
-            ws.send(`${chunk} ${x},${y}`);
+            wsStream.write(`${chunk} ${x},${y} \0`);
         } catch (error) {
-            ws.send("Invalid command");
+            wsStream.write("Invalid command");
         }
     })
 }
