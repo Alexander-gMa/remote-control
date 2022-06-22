@@ -18,13 +18,19 @@ wsServer.on("listening", () => {
 export const connection = async (ws: any) => {
     const wsStream = createWebSocketStream(ws, { encoding: "utf-8" });
     wsStream.on("data", (chunk) => {
-        const [method, value] = chunk.split(' ');
+        const [method, ...value] = chunk?.split(' ');
         const { x, y } = robot.getMousePos();
-        move_mouse(method, x, y, value);
-    })
-    wsStream.on("error", (err) => {
-        console.log(err.message);
+        try {
+            if (method !== 'mouse_position') {
+                move_mouse(method, x, y, value[0]);
+            }
+            ws.send(`${chunk} ${x},${y}`);
+
+        } catch (error) {
+            ws.send("Invalid command");
+        }
     })
 }
+
 
 wsServer.on('connection', connection);

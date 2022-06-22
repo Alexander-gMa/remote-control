@@ -14,5 +14,7 @@ export const move_mouse = (method: string, x: number, y: number, value: number) 
         case 'mouse_right':
             robot.moveMouse(x + +value, y);
             break;
+        default:
+            throw new Error();
     }
 }
