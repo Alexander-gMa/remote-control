@@ -23,7 +23,7 @@ export const connection = async (ws: any) => {
         const { x, y } = robot.getMousePos();
         try {
             if (method !== 'mouse_position') {
-                move_mouse(method, x, y, value[0]);
+                move_mouse(method, x, y, value);
             }
             ws.send(`${chunk} ${x},${y}`);
         } catch (error) {
