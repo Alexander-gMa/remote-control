@@ -1,7 +1,7 @@
 // import Jimp from 'jimp';
 import { httpServer } from './http_server/index';
 // import robot from 'robotjs';
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, createWebSocketStream } from 'ws';
 
 const HTTP_PORT = 3000;
 const WS_PORT = 8080;
@@ -9,7 +9,18 @@ const WS_PORT = 8080;
 console.log(`Start static http server on the ${HTTP_PORT} port!`);
 httpServer.listen(HTTP_PORT);
 
+let frontData = ''
+
 const wsServer = new WebSocketServer({ port: WS_PORT });
 wsServer.on("listening", () => {
     console.log(`Start WebSocketServer on the ${WS_PORT} port!`)
+})
+wsServer.on('connection', async (ws) => {
+    const wsStream = createWebSocketStream(ws, { encoding: 'utf8' })
+
+    wsStream.on('data', (chunk) => {
+        frontData = chunk;
+        console.log(frontData)
+    })
+
 })
