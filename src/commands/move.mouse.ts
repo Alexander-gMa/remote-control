@@ -15,10 +15,9 @@ export const move_mouse = (method: string, x: number, y: number, value: Array<st
             robot.moveMouse(x + +value[0], y);
             break;
         case 'draw_circle':
-            robot.moveMouse(x + +value[0], y);
             mouseToggle('down');
-            for (let i = -0.06; i <= Math.PI * 2; i += 0.06) {
-                const newX = x + (+value[0] * Math.cos(i));
+            for (let i = 0; i <= Math.PI * 2; i += 0.06) {
+                const newX = x - +value[0] + (+value[0] * Math.cos(i));
                 const newY = y + (+value[0] * Math.sin(i));
                 robot.moveMouse(newX, newY);
             }
