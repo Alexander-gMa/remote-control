@@ -1,6 +1,5 @@
 import robot from "robotjs";
 import Jimp from 'jimp';
-import internal from "stream";
 import { TakeScreenshotType } from "../types";
 import { IMG_HEIGHT, IMG_WIDTH } from "../../common/constants";
 

@@ -1,4 +1,3 @@
-// import Jimp from 'jimp';
 import { httpServer } from './http_server/index';
 import { wsServer } from './ws_server';
 import { HTTP_PORT, WS_PORT } from './common/constants';

@@ -1,4 +1,4 @@
-import robot, { mouseToggle } from 'robotjs';
+import robot from 'robotjs';
 import { draw_angle_figure } from './figure/angleFigure';
 import { draw_circle } from './figure/circle';
 import { MoveMouseType } from './types';
