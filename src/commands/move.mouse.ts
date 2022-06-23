@@ -1,8 +1,9 @@
 import robot, { mouseToggle } from 'robotjs';
 import { draw_angle_figure } from './figure/angleFigure';
 import { draw_circle } from './figure/circle';
+import { MoveMouseType } from './types';
 
-export const move_mouse = (method: string, x: number, y: number, value: Array<string>) => {
+export const move_mouse: MoveMouseType = (method, x, y, value) => {
     switch (method) {
         case 'mouse_down':
             robot.moveMouse(x, y + +value[0]);

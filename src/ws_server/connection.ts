@@ -1,18 +1,18 @@
-import { createWebSocketStream } from 'ws';
+import { createWebSocketStream, WebSocket } from 'ws';
 
 import robot from 'robotjs';
 
 import { move_mouse } from '../commands/move.mouse';
 import { takeScreenshot } from '../commands/prnt_screen/screenshot';
 
-export const connection = async (ws: any) => {
+export const connection = async (ws: WebSocket) => {
     const wsStream = createWebSocketStream(ws, { encoding: "utf-8", decodeStrings: false });
     wsStream.on("data", async (chunk) => {
         const [method, ...value] = chunk?.split(' ');
         const { x, y } = robot.getMousePos();
         try {
             if (method === 'prnt_scrn') {
-                await takeScreenshot(wsStream, method, x, y, 250, 250)
+                await takeScreenshot(wsStream, method, x, y)
                 return;
             }
             if (method !== 'mouse_position') {
@@ -22,5 +22,8 @@ export const connection = async (ws: any) => {
         } catch (error) {
             wsStream.write("Invalid command");
         }
+    });
+    ws.on('close', () => {
+        console.info('Connection was closed!')
     })
 }

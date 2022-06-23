@@ -1,5 +1,7 @@
 import robot, { mouseToggle } from 'robotjs';
-export const draw_angle_figure = (x: number, y: number, value: Array<string>) =>{
+import { DrawFigureType } from '../types';
+
+export const draw_angle_figure: DrawFigureType = (x, y, value) => {
     mouseToggle('down');
     for (let i = 0; i <= (+value[0]); i += 4) {
         robot.moveMouse(x + i, y);
