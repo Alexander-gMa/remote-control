@@ -2,11 +2,11 @@ import robot from "robotjs";
 import Jimp from 'jimp';
 import internal from "stream";
 import { TakeScreenshotType } from "../types";
+import { IMG_HEIGHT, IMG_WIDTH } from "../../common/constants";
 
 
 export const takeScreenshot: TakeScreenshotType = async (wsStream, method, x, y) => {
-    const IMG_WIDTH = 200;
-    const IMG_HEIGHT = 200;
+
     const img = robot.screen.capture(x - IMG_WIDTH / 2, y - IMG_HEIGHT / 2, IMG_WIDTH, IMG_HEIGHT);
 
     for (let i = 0; i < img.image.length; i += 1) {
