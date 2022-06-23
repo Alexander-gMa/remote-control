@@ -24,4 +24,5 @@ export const takeScreenshot: TakeScreenshotType = async (wsStream, method, x, y)
     const base64 = await image.getBase64Async(image.getMIME())
 
     wsStream.write(`${method} ${base64.split(',')[1]}\0`);
+    console.info(`result: ${method}`);
 }

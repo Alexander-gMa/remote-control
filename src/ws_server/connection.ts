@@ -18,7 +18,8 @@ export const connection = async (ws: WebSocket) => {
             if (method !== 'mouse_position') {
                 move_mouse(method, x, y, value);
             }
-            wsStream.write(`${chunk} ${x},${y}\0`);
+            wsStream.write(`${chunk} ${x},${y} \0`);
+            console.info(`result: ${chunk}`);
         } catch (error) {
             wsStream.write("Invalid command");
         }
