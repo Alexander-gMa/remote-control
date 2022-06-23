@@ -1,4 +1,4 @@
-import robot, { dragMouse, mouseToggle } from 'robotjs';
+import robot, { mouseToggle } from 'robotjs';
 
 export const move_mouse = (method: string, x: number, y: number, value: Array<string>) => {
     switch (method) {
