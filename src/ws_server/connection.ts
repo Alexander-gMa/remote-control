@@ -25,6 +25,7 @@ export const connection = async (ws: WebSocket) => {
         }
     });
     ws.on('close', () => {
-        console.info('Connection was closed!')
+        console.info('User logged out!')
+        wsStream.destroy();
     })
 }
